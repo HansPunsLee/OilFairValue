@@ -7,6 +7,17 @@ from utils import get_oil_data
 from utils import calculate_annualized_volatility
 from utils import calculate_rolling_volatility
 
+st.markdown("""
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+    html, body, [class*="css"]  {
+        font-family: 'Inter', sans-serif;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
+
 
 # Get latest oil price
 try:
@@ -50,7 +61,7 @@ if st.button("Estimate Fair Value"):
     st.markdown(f"**Black-Scholes Price:** ${bs_price:.2f}")
     st.markdown(f"**Monte Carlo Estimated Price:** ${mc_price:.2f}")
     st.markdown(f"**Probability In-The-Money:** {prob_itm*100:.2f}%")
-    
+
     result_data = {
         "Spot Price": [S],
         "Strike Price": [K],
