@@ -13,7 +13,7 @@ except Exception as e:
     st.warning("Couldn't fetch live oil data. Using default spot price.")
     latest_price = 80.0  # fallback
 
-st.title("Oil Option Fair Value Estimator")
+st.title("Oil Option Fair Value Estimator") 
 st.write("Estimate the fair value of oil options using Black-Scholes and Monte Carlo simulation.")
 
 st.header(" Input Parameters")
@@ -48,6 +48,7 @@ if st.button("Estimate Fair Value"):
     st.markdown(f"**Monte Carlo Estimated Price:** ${mc_price:.2f}")
     st.markdown(f"**Probability In-The-Money:** {prob_itm*100:.2f}%")
 
+#plotting
 def plot_simulated_prices(S, T, r, sigma, simulations):
     Z = np.random.standard_normal(simulations)
     ST = S * np.exp((r - 0.5 * sigma**2) * T + sigma * np.sqrt(T) * Z)
