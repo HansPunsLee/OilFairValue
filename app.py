@@ -4,6 +4,8 @@ import numpy as np
 from models import black_scholes, monte_carlo_option_price
 from utils import get_oil_data
 from utils import calculate_annualized_volatility
+from utils import calculate_rolling_volatility
+
 
 # Get latest oil price
 try:
@@ -69,8 +71,12 @@ if st.button("Show Price Distribution"):
 
 st.header("Historical Oil Prices")
 
-if st.checkbox("Show historical data"):
+if st.checkbox("Show historical data and rolling volatility"):
     df = get_oil_data()
-    st.line_chart(df)
+    df = calculate_rolling_volatility(df)
 
-    st.write("Latest Price:", df['Oil Price'].iloc[-1])
+    st.line_chart(df[['Oil Price', 'Rolling Volatility']])
+
+    st.write(f"Latest Oil Price: ${df['Oil Price'].iloc[-1]:.2f}")
+    st.write(f"Latest Annualized Volatility: {df['Rolling Volatility'].iloc[-1]*100:.2f}%")
+

@@ -22,3 +22,9 @@ def calculate_annualized_volatility(df, window=30):
     # Annualized volatility = daily volatility * sqrt(252 trading days)
     annualized_vol = daily_vol.iloc[-1] * np.sqrt(252)
     return round(annualized_vol, 4)
+
+def calculate_rolling_volatility(df, window=30):
+    returns = np.log(df['Oil Price'] / df['Oil Price'].shift(1))
+    rolling_vol = returns.rolling(window=window).std() * np.sqrt(252)
+    df['Rolling Volatility'] = rolling_vol
+    return df
