@@ -1,6 +1,7 @@
 import streamlit as st
 import matplotlib.pyplot as plt
 import numpy as np
+import pandas as pd 
 from models import black_scholes, monte_carlo_option_price
 from utils import get_oil_data
 from utils import calculate_annualized_volatility
@@ -49,6 +50,28 @@ if st.button("Estimate Fair Value"):
     st.markdown(f"**Black-Scholes Price:** ${bs_price:.2f}")
     st.markdown(f"**Monte Carlo Estimated Price:** ${mc_price:.2f}")
     st.markdown(f"**Probability In-The-Money:** {prob_itm*100:.2f}%")
+
+#Downloadable CSV File
+result_data = {
+        "Spot Price": [S],
+        "Strike Price": [K],
+        "Time to Maturity": [T],
+        "Risk-Free Rate": [r],
+        "Volatility": [sigma],
+        "Option Type": [option_type],
+        "Black-Scholes Price": [bs_price],
+        "Monte Carlo Price": [mc_price],
+        "Probability ITM": [prob_itm]
+    }
+    result_df = pd.DataFrame(result_data)
+
+    csv = result_df.to_csv(index=False)
+    st.download_button(
+        label="Download Results as CSV",
+        data=csv,
+        file_name="option_fair_value_results.csv",
+        mime="text/csv"
+    )
 
 #plotting
 def plot_simulated_prices(S, T, r, sigma, simulations):
