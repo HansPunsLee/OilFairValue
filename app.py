@@ -63,10 +63,10 @@ result_data = {
         "Monte Carlo Price": [mc_price],
         "Probability ITM": [prob_itm]
     }
-    result_df = pd.DataFrame(result_data)
+result_df = pd.DataFrame(result_data)
 
-    csv = result_df.to_csv(index=False)
-    st.download_button(
+csv = result_df.to_csv(index=False)
+st.download_button(
         label="Download Results as CSV",
         data=csv,
         file_name="option_fair_value_results.csv",
