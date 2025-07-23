@@ -50,9 +50,8 @@ if st.button("Estimate Fair Value"):
     st.markdown(f"**Black-Scholes Price:** ${bs_price:.2f}")
     st.markdown(f"**Monte Carlo Estimated Price:** ${mc_price:.2f}")
     st.markdown(f"**Probability In-The-Money:** {prob_itm*100:.2f}%")
-
-#Downloadable CSV File
-result_data = {
+    
+    result_data = {
         "Spot Price": [S],
         "Strike Price": [K],
         "Time to Maturity": [T],
@@ -63,10 +62,10 @@ result_data = {
         "Monte Carlo Price": [mc_price],
         "Probability ITM": [prob_itm]
     }
-result_df = pd.DataFrame(result_data)
+    result_df = pd.DataFrame(result_data)
 
-csv = result_df.to_csv(index=False)
-st.download_button(
+    csv = result_df.to_csv(index=False)
+    st.download_button(
         label="Download Results as CSV",
         data=csv,
         file_name="option_fair_value_results.csv",
